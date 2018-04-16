@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="androud.app.leahy.edgedemo">
+
+
+    <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY"/>
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+
+        <receiver android:name=".singleplus.CocktailSinglePlusProvider">
+            <intent-filter>
+                <action android:name="com.samsung.android.cocktail.v2.action.COCKTAIL_UPDATE"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="com.samsung.android.cocktail.provider"
+                android:resource="@xml/edge_single_plus"/>
+        </receiver>
+
+
+        <!-- 应该是左边的视图 -->
+
+        <receiver android:name=".singleplus.CocktailSampleProvider">
+            <intent-filter>
+                <action android:name="com.samsung.android.cocktail.v2.action.COCKTAIL_UPDATE"/>
+                <action android:name="com.example.cocktailslooksample.action.ACTION_REMOTE_LONGCLICK"/>
+                <action android:name="com.example.cocktailslooksample.action.ACTION_REMOTE_CLICK"/>
+                <action android:name="com.example.cocktailslooksample.action.ACTION_PULL_TO_REFRESH"/>
+            </intent-filter>
+
+            <meta-data
+
+                android:name="com.samsung.android.cocktail.provider"
+                android:resource="@xml/edge_single_plus"/>
+        </receiver>
+
+
+        <service
+            android:name=".singleplus.LongClickRemoteViewService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            />
+
+    </application>
+
+</manifest>
